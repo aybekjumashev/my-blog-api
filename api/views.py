@@ -1,5 +1,5 @@
-from .models import Post, Category, Tag
-from .serializers import PostSerializer, UserSerializer, CategorySerializer, TagSerializer
+from .models import Post, Category, Tag, Comment
+from .serializers import PostSerializer, UserSerializer, CategorySerializer, TagSerializer, CommentSerializer
 from rest_framework import viewsets, filters
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
@@ -57,7 +57,10 @@ class TagViewSet(viewsets.ModelViewSet):
     @method_decorator(cache_page(60 * 10))
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
-    
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
 class StatisticsViewSet(viewsets.ViewSet):
     def list(self, request):

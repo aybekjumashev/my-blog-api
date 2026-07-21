@@ -1,14 +1,21 @@
-name: Salem Beriwshi
+name: CI
 
 on: [push]
 
 jobs:
-  say-hello:
+  tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Terminalǵa jazıw
-        run: echo "Assalawma áleykum, GitHub Actions!"
+      - name: Install requirements
+        uses: actions/setup-python@v4
+        run: pip install -r requirements.txt
 
-      - name: Python versiyasın tekseriw
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Check Python version
         run: python --version
+
+      - name: Run tests
+        run: pytest

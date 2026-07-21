@@ -1,0 +1,14 @@
+name: Salem Beriwshi
+
+on: [push]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Terminalǵa jazıw
+        run: echo "Assalawma áleykum, GitHub Actions!"
+
+      - name: Python versiyasın tekseriw
+        run: python --version

@@ -3,30 +3,21 @@ services:
     image: postgres:17-alpine 
     volumes:
       - postgres_data:/var/lib/postgresql/data/ 
-    environment:
-      - POSTGRES_DB=my-blog-db 
-      - POSTGRES_USER=my-blog-db-user 
-      - POSTGRES_PASSWORD=hc38weufygcv78b34we87fiu 
-    ports:
-      - "5432:5432"
+    env_file:
+      - .env
 
   web:
     build: . 
-    # command: python manage.py runserver 0.0.0.0:8000  
     volumes:
       - .:/app  
+      - static_volume:/app/staticfiles
     ports:
       - "8000:8000" 
     depends_on:
       - db 
-    environment:
-      - DB_NAME=my-blog-db
-      - DB_USER=my-blog-db-user
-      - DB_PASSWORD=hc38weufygcv78b34we87fiu
-      - DB_HOST=db 
-      - SECRET_KEY=django-insecure-dn*1^9re84pvdk9&6ijy*jxux8_fv4w1b53n7
-      - DEBUG=True
-      - ALLOWED_HOSTS=localhost,127.0.0.1
+    env_file:
+      - .env
 
 volumes:
   postgres_data:
+  static_volume:

@@ -7,11 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout files
-        uses: ls
-
       - name: Install requirements
-        run: pip install -r requirements.txt
+        run: pip install -r ./requirements.txt
 
       - name: Install pytest
         run: pip install pytest
